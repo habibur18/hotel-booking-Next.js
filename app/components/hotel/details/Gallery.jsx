@@ -1,14 +1,33 @@
-const Gallery = () => {
+import Image from "next/image";
+
+const Gallery = ({ gallery }) => {
+  const newGallery = [...gallery];
+  newGallery.shift();
   return (
     <section className="container">
       <div className="grid grid-cols-2 imageshowCase">
-        <img src="./assets/images/1.png" className="h-[400px]" alt="" />
+        <Image
+          src={gallery[0]}
+          placeholder="blur"
+          blurDataURL={gallery[0]}
+          width={500}
+          height={400}
+          className="h-[400px]"
+          alt=""
+        />
 
         <div className="grid grid-cols-2 grid-rows-2 h-[400px]">
-          <img src="./assets/images/2.png" alt="" />
-          <img src="./assets/images/3.png" alt="" />
-          <img src="./assets/images/4.png" alt="" />
-          <img src="./assets/images/5.png" alt="" />
+          {newGallery.map((item, index) => (
+            <Image
+              key={index}
+              src={item}
+              placeholder="blur"
+              blurDataURL={item}
+              width={500}
+              height={400}
+              alt=""
+            />
+          ))}
         </div>
       </div>
     </section>
